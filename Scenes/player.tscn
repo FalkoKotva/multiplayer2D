@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dba1thj60ppvq"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_g4v7s"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 4.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1235344898]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=233971609]
+position = Vector2(3.2782555e-07, -9.655)
+scale = Vector2(8.000001, 19.31)
+texture = SubResource("CanvasTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1840232765]
+shape = SubResource("CircleShape2D_g4v7s")
