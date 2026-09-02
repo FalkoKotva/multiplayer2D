@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://bn1xenp5ckbxk"]
 
+[ext_resource type="Script" uid="uid://cmkadgt4cf8iy" path="res://Scenes/main.gd" id="1_bo1nx"]
+
 [node name="Main" type="Node" unique_id=59663738]
+script = ExtResource("1_bo1nx")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=677618797]
+spawn_path = NodePath("..")
