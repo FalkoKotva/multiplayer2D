@@ -1,26 +1,31 @@
-[gd_scene format=3 uid="uid://dba1thj60ppvq"]
+[gd_scene format=3 uid="uid://c5dfksrt3u5km"]
 
-[ext_resource type="Script" uid="uid://b07p8x7qawqff" path="res://Scenes/Player/player.gd" id="1_v0iea"]
+[ext_resource type="Script" uid="uid://d1d0h37vo3my4" path="res://Scenes/Player/player.gd" id="1_symyc"]
+[ext_resource type="PackedScene" uid="uid://bgxf7cg6w0ea4" path="res://component/player_input_synchronizer_component.tscn" id="2_abrql"]
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_uvnfx"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a3d8c"]
+properties/0/path = NodePath(".:global_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_g4v7s"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sfv1e"]
+size = Vector2(18, 32)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
-radius = 4.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_sfv1e"]
 
-[node name="Player" type="CharacterBody2D" unique_id=1235344898]
+[node name="Player" type="CharacterBody2D" unique_id=1613648021]
 collision_layer = 0
-script = ExtResource("1_v0iea")
+script = ExtResource("1_symyc")
 
-[node name="PlayerInputSynchronizerComponent" type="MultiplayerSynchronizer" parent="." unique_id=1244770311]
-replication_config = SubResource("SceneReplicationConfig_uvnfx")
+[node name="PlayerInputSynchronizerComponent" parent="." unique_id=819227121 instance=ExtResource("2_abrql")]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=233971609]
-position = Vector2(3.2782555e-07, -8)
-scale = Vector2(8.000001, 16)
-texture = SubResource("CanvasTexture_g4v7s")
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=75093897]
+replication_config = SubResource("SceneReplicationConfig_a3d8c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1840232765]
-position = Vector2(0, -4)
-shape = SubResource("CircleShape2D_g4v7s")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=926069351]
+position = Vector2(0, -16)
+texture = SubResource("PlaceholderTexture2D_sfv1e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1508696680]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_sfv1e")
