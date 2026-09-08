@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bn1xenp5ckbxk"]
 
-[ext_resource type="Script" uid="uid://cmkadgt4cf8iy" path="res://Scenes/main.gd" id="1_bo1nx"]
-[ext_resource type="PackedScene" uid="uid://btg3a0chq0bi" path="res://Scenes/Manager/EnemyManager.tscn" id="2_8gbba"]
-[ext_resource type="Texture2D" uid="uid://ca2mavtrmctwb" path="res://Scenes/Assets/arena.png" id="2_bo1nx"]
-[ext_resource type="PackedScene" uid="uid://dxtvb7wgvikkp" path="res://Scenes/game_ui.tscn" id="3_jjvhh"]
+[ext_resource type="Script" uid="uid://cmkadgt4cf8iy" path="res://Scenes/Main/main.gd" id="1_5yls4"]
+[ext_resource type="PackedScene" uid="uid://btg3a0chq0bi" path="res://Scenes/Manager/EnemyManager.tscn" id="2_p6jpk"]
+[ext_resource type="PackedScene" uid="uid://dxtvb7wgvikkp" path="res://Scenes/Game_UI/game_ui.tscn" id="3_2a143"]
+[ext_resource type="Texture2D" uid="uid://ca2mavtrmctwb" path="res://Scenes/Assets/arena.png" id="4_xlvfx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(32, 300)
@@ -12,9 +12,9 @@ size = Vector2(32, 300)
 size = Vector2(500, 32)
 
 [node name="Main" type="Node" unique_id=59663738]
-script = ExtResource("1_bo1nx")
+script = ExtResource("1_5yls4")
 
-[node name="EnemyManager" parent="." unique_id=1261197853 node_paths=PackedStringArray("enemy_spawn_root", "spawn_rect") instance=ExtResource("2_8gbba")]
+[node name="EnemyManager" parent="." unique_id=1261197853 node_paths=PackedStringArray("enemy_spawn_root", "spawn_rect") instance=ExtResource("2_p6jpk")]
 enemy_spawn_root = NodePath("../YSortRoot")
 spawn_rect = NodePath("../SpawnRect")
 
@@ -22,7 +22,7 @@ spawn_rect = NodePath("../SpawnRect")
 _spawnable_scenes = PackedStringArray("uid://b4tqu1ivlain1", "uid://b4mfmrfxblkr5")
 spawn_path = NodePath("../YSortRoot")
 
-[node name="GameUI" parent="." unique_id=579759211 node_paths=PackedStringArray("enemy_manager") instance=ExtResource("3_jjvhh")]
+[node name="GameUI" parent="." unique_id=579759211 node_paths=PackedStringArray("enemy_manager") instance=ExtResource("3_2a143")]
 enemy_manager = NodePath("../EnemyManager")
 
 [node name="PlayerSpawnPosition" type="Marker2D" parent="." unique_id=135363278]
@@ -30,7 +30,7 @@ position = Vector2(320, 185)
 
 [node name="Arena" type="Sprite2D" parent="." unique_id=1227925707]
 position = Vector2(320, 185)
-texture = ExtResource("2_bo1nx")
+texture = ExtResource("4_xlvfx")
 metadata/_edit_lock_ = true
 
 [node name="StaticBodies" type="Node2D" parent="." unique_id=360963839]

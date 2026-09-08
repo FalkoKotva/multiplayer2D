@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal died
+
 @onready var player_input_synchronizer_component: PlayerInputSynchronizerComponent = $PlayerInputSynchronizerComponent
 @onready var weapon_root: Node2D = $Visuals/WeaponRoot
 @onready var fire_rate_timer: Timer = $FireRateTimer
@@ -13,17 +15,23 @@ extends CharacterBody2D
 var bullet_scene: PackedScene = preload("uid://b4tqu1ivlain1")
 var  muzzle_flash_scene: PackedScene = preload("uid://d2il2qjacmuh1")
 var input_multiplayer_authority: int
-
+var is_dying: bool
 
 func _ready():
 	player_input_synchronizer_component.set_multiplayer_authority(input_multiplayer_authority)
-	health_component.died.connect(_on_died)
+	
+	if is_multiplayer_authority():
+		health_component.died.connect(_on_died)
 
 func _process(_delta: float) -> void:
 
 	update_aim_position()
 	
 	if is_multiplayer_authority():
+		if is_dying:
+			global_position = Vector2.RIGHT * 1000
+			return
+		
 		velocity = player_input_synchronizer_component.movement_vector * 100
 		move_and_slide()
 		if player_input_synchronizer_component.is_attack_pressed:
@@ -62,7 +70,23 @@ func play_fire_effects():
 	muzzle_flash.rotation = barrel_position.global_rotation
 	get_parent().add_child(muzzle_flash)
 
+func kill():
+	if !is_multiplayer_authority():
+		push_error("Cannot call kill on on-server client")
+		return
+	
+	_kill.rpc()
+	await get_tree().create_timer(.5).timeout
+	
+	died.emit()
+	queue_free()
 
+@rpc("authority","call_local","reliable")
+func _kill():
+	is_dying = true
+	player_input_synchronizer_component.public_visibility = false
+	
+	
 func _on_died():
-	print("Player died")
+	kill()
 	

@@ -6,11 +6,14 @@ extends Area2D
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	
+func _handle_hit(hitbox_component: HitBoxComponent):
+	hitbox_component.register_hitbox_hit(self)
+	health_component.damage(hitbox_component.damage)
+
 func _on_area_entered(other_area: Area2D):
 	if !is_multiplayer_authority() or other_area is not HitBoxComponent:
 		return
-		
-	var hitbox_component: HitBoxComponent = other_area
-	hitbox_component.register_hitbox_hit(self)
-	health_component.damage(hitbox_component.damage)
+	
+	_handle_hit.call_deferred(other_area)
+
 	

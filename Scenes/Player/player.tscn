@@ -75,6 +75,7 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sfv1e"]
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 8.0
@@ -100,19 +101,6 @@ max_health = 5
 wait_time = 0.25
 one_shot = true
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1508696680]
-visible = false
-position = Vector2(0, -10)
-shape = SubResource("CircleShape2D_sfv1e")
-
-[node name="HurtBoxComponent" parent="." unique_id=538338692 node_paths=PackedStringArray("health_component") instance=ExtResource("6_dd0ac")]
-position = Vector2(0, -11)
-collision_mask = 4
-health_component = NodePath("../HealthComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent" unique_id=275400110]
-shape = SubResource("CircleShape2D_g4v7s")
-
 [node name="Visuals" type="Node2D" parent="." unique_id=357590190]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=926069351]
@@ -134,3 +122,15 @@ offset = Vector2(-13, -6)
 [node name="BarrelPosition" type="Marker2D" parent="Visuals/WeaponRoot/WeaponAnimation" unique_id=207106484]
 unique_name_in_owner = true
 position = Vector2(18, -1)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1508696680]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_sfv1e")
+
+[node name="HurtBoxComponent" parent="." unique_id=538338692 node_paths=PackedStringArray("health_component") instance=ExtResource("6_dd0ac")]
+position = Vector2(0, -11)
+collision_mask = 4
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent" unique_id=275400110]
+shape = SubResource("CircleShape2D_g4v7s")
