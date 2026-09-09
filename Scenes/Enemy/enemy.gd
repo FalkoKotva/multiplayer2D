@@ -8,7 +8,10 @@ extends CharacterBody2D
 @onready var charged_attack_timer: Timer = $ChargedAttackTimer
 @onready var hit_box_collision_shape: CollisionShape2D = $HitBoxComponent/HitBoxCollisionShape
 @onready var alert_sprite: Sprite2D = $HurtBoxComponent/AlertSprite
+@onready var hurt_box_component: HurtBoxComponent = $HurtBoxComponent
 
+var impact_particles_scene: PackedScene = preload("uid://cwswfde2qtsx1")
+var ground_particles_scene: PackedScene = preload("uid://bjig240r2fgvb")
 @export var speed: int = 25
 var dash_speed: int = 400
 
@@ -43,6 +46,7 @@ func _ready() -> void:
 	if is_multiplayer_authority():
 		health_component.died.connect(_on_died)
 		state_machine.set_initial_state(state_spawn)	
+		hurt_box_component.hit_by_hitbox.connect(_on_hit_by_hitbox)
 		
 
 func _process(_delta: float) -> void:
@@ -155,7 +159,28 @@ func aquire_target():
 	if nearest_player != null:
 		target_position = nearest_player.global_position
 
+@rpc("authority","call_local")
+func spawn_hit_particles():
+	var hit_particles: Node2D = impact_particles_scene.instantiate()
+	hit_particles.global_position = hurt_box_component.global_position
+	get_parent().add_child(hit_particles)
+
+@rpc("authority","call_local")
+func spawn_deadh_particles():
+	var death_particles: Node2D = ground_particles_scene.instantiate()
+
+	
+	var backgroun_node: Node = Main.background_mask
+	if !is_instance_valid(backgroun_node):
+		backgroun_node = get_parent()
+	backgroun_node.add_child(death_particles)
+	
+	death_particles.global_position = hurt_box_component.global_position
+
 func _on_died():
+	spawn_deadh_particles.rpc()
 	GameEvents.emit_enemy_died()
 	queue_free()
 	
+func _on_hit_by_hitbox():
+	spawn_hit_particles.rpc()

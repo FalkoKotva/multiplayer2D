@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://cmkadgt4cf8iy" path="res://Scenes/Main/main.gd" id="1_5yls4"]
 [ext_resource type="PackedScene" uid="uid://btg3a0chq0bi" path="res://Scenes/Manager/EnemyManager.tscn" id="2_p6jpk"]
 [ext_resource type="PackedScene" uid="uid://dxtvb7wgvikkp" path="res://Scenes/Game_UI/game_ui.tscn" id="3_2a143"]
+[ext_resource type="PackedScene" uid="uid://dorpqipyylmcs" path="res://game_camera.tscn" id="4_2a143"]
 [ext_resource type="Texture2D" uid="uid://ca2mavtrmctwb" path="res://Scenes/Assets/arena.png" id="4_xlvfx"]
+[ext_resource type="Texture2D" uid="uid://bglwtseca8xl7" path="res://resources/clip_mask.png" id="5_p6jpk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
 size = Vector2(32, 300)
@@ -24,6 +26,10 @@ spawn_path = NodePath("../YSortRoot")
 
 [node name="GameUI" parent="." unique_id=579759211 node_paths=PackedStringArray("enemy_manager") instance=ExtResource("3_2a143")]
 enemy_manager = NodePath("../EnemyManager")
+
+[node name="GameCamera" parent="." unique_id=1303169440 instance=ExtResource("4_2a143")]
+position = Vector2(320, 180)
+metadata/_edit_lock_ = true
 
 [node name="PlayerSpawnPosition" type="Marker2D" parent="." unique_id=135363278]
 position = Vector2(320, 185)
@@ -76,6 +82,14 @@ offset_right = 527.0
 offset_bottom = 289.0
 mouse_filter = 2
 metadata/_edit_lock_ = true
+
+[node name="BackgroundEffects" type="Node2D" parent="." unique_id=580719760]
+
+[node name="BackgroundMask" type="Sprite2D" parent="BackgroundEffects" unique_id=308583865]
+unique_name_in_owner = true
+clip_children = 1
+position = Vector2(320, 180)
+texture = ExtResource("5_p6jpk")
 
 [node name="YSortRoot" type="Node2D" parent="." unique_id=714305312]
 y_sort_enabled = true

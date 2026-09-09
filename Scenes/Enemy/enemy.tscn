@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bnlqrh827gxw0" path="res://Scenes/Component/health_component.tscn" id="2_2t2r4"]
 [ext_resource type="PackedScene" uid="uid://t41drysdv3gk" path="res://Scenes/Component/hurt_box_component.tscn" id="3_dmwl5"]
 [ext_resource type="PackedScene" uid="uid://bnnrcb52ie51l" path="res://Scenes/Bullet/hit_box_component.tscn" id="5_d40jh"]
+[ext_resource type="PackedScene" uid="uid://cphc4o74v1vvm" path="res://component/hit_flash_component.tscn" id="5_pqgp3"]
+[ext_resource type="Shader" uid="uid://ckr82kutxyt8g" path="res://component/hit_flash.gdshader" id="6_4ad2a"]
 [ext_resource type="Texture2D" uid="uid://crohfvlefqkwo" path="res://Scenes/Enemy/attack_alert.png" id="6_gx76c"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nvvbs"]
@@ -20,6 +22,11 @@ properties/2/replication_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dmwl5"]
 size = Vector2(16, 23)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kiqm3"]
+resource_local_to_scene = true
+shader = ExtResource("6_4ad2a")
+shader_parameter/percent = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 radius = 5.0
@@ -66,10 +73,12 @@ shape = SubResource("RectangleShape2D_dmwl5")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=1245943450]
 
-[node name="Sprite2D" type="Sprite2D" parent="Visuals" unique_id=654476665]
+[node name="HitFlashComponent" parent="Visuals" unique_id=693307300 node_paths=PackedStringArray("health_component") instance=ExtResource("5_pqgp3")]
+material = SubResource("ShaderMaterial_kiqm3")
 texture = ExtResource("1_mw074")
 centered = false
 offset = Vector2(-8, -23)
+health_component = NodePath("../../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=295133115]
 position = Vector2(0, -5)
