@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b5risjad6o8v" path="res://resources/UI/buttons.png" id="1_7ct1h"]
 [ext_resource type="FontFile" uid="uid://c58y8xs6jcwk8" path="res://resources/font/KarenFat.ttf" id="1_d4nwg"]
+[ext_resource type="Texture2D" uid="uid://bpewbsryojljg" path="res://Scenes/Assets/panel.png" id="2_886mr"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7ct1h"]
 load_path = "res://.godot/imported/buttons.png-d8fefa3576c1fd12bd850b186347cf15.ctex"
@@ -46,6 +47,14 @@ texture_margin_right = 4.0
 texture_margin_bottom = 5.0
 region_rect = Rect2(32, 3, 16, 15)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3daex"]
+texture = ExtResource("2_886mr")
+texture_margin_left = 4.0
+texture_margin_top = 5.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(0, 0, 32, 32)
+
 [resource]
 default_font = ExtResource("1_d4nwg")
 default_font_size = 16
@@ -59,3 +68,4 @@ Button/styles/focus = SubResource("StyleBoxEmpty_dhnw2")
 Button/styles/hover = SubResource("StyleBoxTexture_owntx")
 Button/styles/normal = SubResource("StyleBoxTexture_2a143")
 Button/styles/pressed = SubResource("StyleBoxTexture_yp2uj")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_3daex")
