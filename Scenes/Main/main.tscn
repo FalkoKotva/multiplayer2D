@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dxtvb7wgvikkp" path="res://Scenes/Game_UI/game_ui.tscn" id="3_2a143"]
 [ext_resource type="PackedScene" uid="uid://dorpqipyylmcs" path="res://game_camera.tscn" id="4_2a143"]
 [ext_resource type="Texture2D" uid="uid://ca2mavtrmctwb" path="res://Scenes/Assets/arena.png" id="4_xlvfx"]
+[ext_resource type="PackedScene" uid="uid://cvneaohhyoxq7" path="res://Scenes/PauseMenu/pause_menu.tscn" id="4_y3v7k"]
 [ext_resource type="Texture2D" uid="uid://bglwtseca8xl7" path="res://resources/clip_mask.png" id="5_p6jpk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
@@ -26,6 +27,9 @@ spawn_path = NodePath("../YSortRoot")
 
 [node name="GameUI" parent="." unique_id=579759211 node_paths=PackedStringArray("enemy_manager") instance=ExtResource("3_2a143")]
 enemy_manager = NodePath("../EnemyManager")
+
+[node name="PauseMenu" parent="." unique_id=522487769 instance=ExtResource("4_y3v7k")]
+visible = false
 
 [node name="GameCamera" parent="." unique_id=1303169440 instance=ExtResource("4_2a143")]
 position = Vector2(320, 180)

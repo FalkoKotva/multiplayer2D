@@ -10,17 +10,31 @@ signal died
 @onready var visuals: Node2D = $Visuals
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var barrel_position: Marker2D = %BarrelPosition
+@onready var display_name_label: Label = $DisplayNameLabel
 
 
 var bullet_scene: PackedScene = preload("uid://b4tqu1ivlain1")
 var  muzzle_flash_scene: PackedScene = preload("uid://d2il2qjacmuh1")
 var input_multiplayer_authority: int
 var is_dying: bool
+var display_name: String
+var is_respawn: bool
 
 func _ready():
 	player_input_synchronizer_component.set_multiplayer_authority(input_multiplayer_authority)
 	
+	var is_single_player = multiplayer.multiplayer_peer is OfflineMultiplayerPeer
+	var is_client_authority = player_input_synchronizer_component.is_multiplayer_authority()
+	
+	if  is_single_player || is_client_authority:
+		display_name_label.visible = false
+	else:
+		display_name_label.text = display_name
+	
+	
 	if is_multiplayer_authority():
+		if is_respawn:
+			health_component.current_health = 1
 		health_component.died.connect(_on_died)
 
 func _process(_delta: float) -> void:
@@ -36,6 +50,8 @@ func _process(_delta: float) -> void:
 		move_and_slide()
 		if player_input_synchronizer_component.is_attack_pressed:
 			try_fire()
+func set_display_name(incoming_name: String):
+	display_name = incoming_name
 
 func update_aim_position():
 	var aim_vector = player_input_synchronizer_component.aim_vector
